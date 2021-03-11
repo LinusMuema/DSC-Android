@@ -1,4 +1,4 @@
-package com.moose.networking
+package com.moose.dsc
 
 import org.junit.Test
 
