@@ -1,9 +1,9 @@
 package com.moose.networking.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.moose.networking.databinding.ActivityMainBinding
 import com.moose.networking.domain.Post
 
@@ -16,21 +16,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         // Get one post using random id
-        val id: Int = (0..100).random()
-        viewModel.getPost(id)
+        binding.getBtn.setOnClickListener {
+            val id: Int = (0..100).random()
+            viewModel.getPost(id)
+        }
 
         // Post one object
-        val post = Post(id = 1, body = "Kotlin is awesome!", title = "Kotlin", userId = 1)
-        viewModel.addPost(post)
+        binding.postBtn.setOnClickListener {
+            val post = Post(id = 1, body = "Kotlin is awesome!", title = "Kotlin", userId = 1)
+            viewModel.addPost(post)
+        }
 
         viewModel.data.observe(this, {
-            Log.d("Networking", "onCreate: $it")
-            // TODO: add a recyclerview
+            binding.data.text = it.toString()
         })
 
         viewModel.error.observe(this, {
-            Log.e("Networking", "onCreate: $it")
-            // TODO: add a recyclerview
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
 
         setContentView(binding.root)
