@@ -1,4 +1,4 @@
-package com.moose.networking.data.retrofit
+package com.moose.networking.data
 
 import com.moose.networking.domain.Post
 import retrofit2.http.Body
